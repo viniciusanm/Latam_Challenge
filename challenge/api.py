@@ -1,5 +1,5 @@
 import fastapi
-from challenge.model import DelayModel
+from model import DelayModel
 
 app = fastapi.FastAPI()
 
