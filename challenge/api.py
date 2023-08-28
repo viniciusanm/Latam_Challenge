@@ -1,4 +1,5 @@
 import fastapi
+from challenge.model import DelayModel
 
 app = fastapi.FastAPI()
 
@@ -9,5 +10,6 @@ async def get_health() -> dict:
     }
 
 @app.post("/predict", status_code=200)
-async def post_predict() -> dict:
+async def post_predict(features) -> dict:
+    delay = DelayModel.predict(features)
     return
