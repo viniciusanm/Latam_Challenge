@@ -14,8 +14,8 @@ class DelayModel:
     def preprocess(
         self,
         data: pd.DataFrame,
-        target_column: str = 'delay'
-    ) -> Union(Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame):
+        target_column: str = 'delay'): 
+            #-> Union(Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame):
         """
         Prepare raw data for training or predict.
 
