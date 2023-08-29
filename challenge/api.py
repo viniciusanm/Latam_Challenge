@@ -24,4 +24,3 @@ async def post_predict(features) -> dict:
 
 if __name__ == '__main__':
     uvicorn.run(app)
-    return
