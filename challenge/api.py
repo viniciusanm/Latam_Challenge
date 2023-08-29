@@ -18,10 +18,10 @@ async def post_predict(features) -> dict:
 
     features, target = DelayModel.preprocess(features)
 
-    
-
+   
     delay = DelayModel.predict(features)
     return delay
 
 if __name__ == '__main__':
     uvicorn.run(app)
+    return

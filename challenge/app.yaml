@@ -1,2 +1,3 @@
 runtime: python37
+runtime: python37
 entrypoint: uvicorn api:app --reload
