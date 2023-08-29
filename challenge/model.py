@@ -4,18 +4,23 @@ from typing import Tuple, Union, List
 
 import xgboost as xgb
 
+import pickle
+
+# load model from pickle file
+model = pickle.load(open("model.pk1", 'rb'))
+
+
 class DelayModel:
 
     def __init__(
         self
     ):
-        self._model = xgb.XGBClassifier(random_state=1, learning_rate=0.01, scale_pos_weight = 4.44) # Model should be saved in this attribute.
+        self._model = model # Model should be saved in this attribute.
 
     def preprocess(
-        self,
         data: pd.DataFrame,
-        target_column: str = 'delay'
-    ) -> Union(Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame):
+        target_column: str = 'delay'): 
+    #-> Union(Tuple[pd.DataFrame, pd.DataFrame], pd.DataFrame):
         """
         Prepare raw data for training or predict.
 
@@ -28,6 +33,10 @@ class DelayModel:
             or
             pd.DataFrame: features.
         """
+
+        data = pd.DataFrame(list(data.values())[0][0], index=[0])
+
+        data['delay'] = 1
 
         features = pd.concat([
         pd.get_dummies(data['OPERA'], prefix = 'OPERA'),
@@ -52,10 +61,9 @@ class DelayModel:
             target (pd.DataFrame): target.
         """
 
-        return self._model.fit(features, target)
+        return model.fit(features, target)
 
     def predict(
-        self,
         features: pd.DataFrame
     ) -> List[int]:
         """
@@ -67,5 +75,4 @@ class DelayModel:
         Returns:
             (List[int]): predicted targets.
         """
-
-        return self._model.predict(features)
+        return model.predict(features)
